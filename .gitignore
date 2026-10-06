@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+*.local
+.wrangler/
+public/r/
+
+# scratch smoke tests (hardcoded abs paths)
+.smoke-*.tsx

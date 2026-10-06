@@ -1,0 +1,815 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+ * KKUI design tokens
+ * Light + dark palettes, semantic naming.
+ * Two vocabularies point at the same values:
+ *   --kk-*   : semantic token names (primary-hover, text-secondary, ...)
+ *   short    : --background / --primary / --border / ... short aliases used by
+ *              the base layer and generic utilities (bg-background, border-border).
+ * ---------------------------------------------------------------- */
+:root {
+  /* brand */
+  --kk-primary: #1677ff;
+  --kk-primary-hover: #4096ff;
+  --kk-primary-active: #0958d9;
+  --kk-primary-bg: #e6f4ff;
+  --kk-primary-bg-hover: #bae0ff;
+  --kk-primary-border: #91caff;
+  --kk-primary-border-hover: #69b1ff;
+  --kk-primary-text: #1677ff;
+  --kk-primary-text-hover: #4096ff;
+  --kk-primary-text-active: #0958d9;
+
+  /* status */
+  --kk-success: #52c41a;
+  --kk-success-hover: #73d13d;
+  --kk-success-active: #389e0d;
+  --kk-success-bg: #f6ffed;
+  --kk-success-bg-hover: #d9f7be;
+  --kk-success-border: #b7eb8f;
+  --kk-success-border-hover: #95de64;
+  --kk-warning: #faad14;
+  --kk-warning-hover: #ffc53d;
+  --kk-warning-active: #d48806;
+  --kk-warning-bg: #fffbe6;
+  --kk-warning-bg-hover: #fff1b8;
+  --kk-warning-border: #ffe58f;
+  --kk-warning-border-hover: #ffd666;
+  --kk-error: #ff4d4f;
+  --kk-error-hover: #ff7875;
+  --kk-error-active: #d9363e;
+  --kk-error-bg: #fff2f0;
+  --kk-error-bg-hover: #fff1f0;
+  --kk-error-border: #ffccc7;
+  --kk-error-border-hover: #ffa39e;
+  --kk-info: #1677ff;
+  --kk-info-hover: #4096ff;
+  --kk-info-active: #0958d9;
+  --kk-info-bg: #e6f4ff;
+  --kk-info-bg-hover: #bae0ff;
+  --kk-info-border: #91caff;
+  --kk-info-border-hover: #69b1ff;
+  --kk-link: #1677ff;
+  --kk-link-hover: #69b1ff;
+  --kk-link-active: #0958d9;
+
+  /* neutral: text */
+  --kk-text: rgba(0, 0, 0, 0.88);
+  --kk-text-secondary: rgba(0, 0, 0, 0.65);
+  --kk-text-tertiary: rgba(0, 0, 0, 0.45);
+  --kk-text-quaternary: rgba(0, 0, 0, 0.25);
+  --kk-text-heading: rgba(0, 0, 0, 0.88);
+  --kk-text-description: rgba(0, 0, 0, 0.45);
+  --kk-text-disabled: rgba(0, 0, 0, 0.25);
+  --kk-text-placeholder: rgba(0, 0, 0, 0.25);
+  --kk-text-light-solid: #fff;
+
+  /* neutral: fill */
+  --kk-fill: rgba(0, 0, 0, 0.15);
+  --kk-fill-secondary: rgba(0, 0, 0, 0.06);
+  --kk-fill-tertiary: rgba(0, 0, 0, 0.04);
+  --kk-fill-quaternary: rgba(0, 0, 0, 0.02);
+  --kk-fill-content: rgba(0, 0, 0, 0.06);
+  --kk-fill-alter: rgba(0, 0, 0, 0.02);
+
+  /* neutral: background */
+  --kk-bg-container: #ffffff;
+  --kk-bg-container-disabled: rgba(0, 0, 0, 0.04);
+  --kk-bg-elevated: #ffffff;
+  --kk-bg-layout: #f5f5f5;
+  --kk-bg-spotlight: rgba(0, 0, 0, 0.85);
+  --kk-bg-mask: rgba(0, 0, 0, 0.45);
+  --kk-bg-text-hover: rgba(0, 0, 0, 0.06);
+  --kk-bg-text-active: rgba(0, 0, 0, 0.15);
+  --kk-bg-solid: #000;
+  --kk-bg-solid-hover: rgba(0, 0, 0, 0.75);
+  --kk-bg-solid-active: rgba(0, 0, 0, 0.95);
+
+  /* neutral: border */
+  --kk-border: #d9d9d9;
+  --kk-border-secondary: #f0f0f0;
+  --kk-split: rgba(5, 5, 5, 0.06);
+
+  /* size */
+  --kk-radius-xs: 2px;
+  --kk-radius-sm: 4px;
+  --kk-radius: 6px;
+  --kk-radius-lg: 8px;
+  --kk-control-height-xs: 16px;
+  --kk-control-height-sm: 24px;
+  --kk-control-height: 32px;
+  --kk-control-height-lg: 40px;
+  --kk-line-width: 1px;
+  --kk-mask-blur: 0px;
+
+  /* data-visualisation palette: five hues that stay distinct in both themes */
+  --kk-chart-1: #1677ff;
+  --kk-chart-2: #52c41a;
+  --kk-chart-3: #faad14;
+  --kk-chart-4: #722ed1;
+  --kk-chart-5: #eb2f96;
+
+  /* application shell surfaces (sidebar / navbar), separate from page surfaces */
+  --kk-sidebar-bg: #fafafa;
+  --kk-sidebar-text: #1f1f1f;
+  --kk-sidebar-border: #f0f0f0;
+  --kk-sidebar-item-hover: rgba(0, 0, 0, 0.04);
+  --kk-sidebar-item-active-bg: #e6f4ff;
+  --kk-sidebar-item-active-text: #1677ff;
+  --kk-line-width-bold: 2px;
+  --kk-control-outline-width: 2px;
+  --kk-control-outline: rgba(5, 145, 255, 0.1);
+  --kk-control-item-bg-hover: rgba(0, 0, 0, 0.04);
+  --kk-control-item-bg-active: #e6f4ff;
+  --kk-control-item-bg-active-hover: #bae0ff;
+
+  /* typography */
+  --kk-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "IBM Plex Sans Thai", "Noto Sans Thai", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --kk-font-family-code: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  --kk-font-size-sm: 12px;
+  --kk-font-size: 14px;
+  --kk-font-size-lg: 16px;
+  --kk-font-size-xl: 20px;
+  --kk-font-size-h1: 38px;
+  --kk-font-size-h2: 30px;
+  --kk-font-size-h3: 24px;
+  --kk-font-size-h4: 20px;
+  --kk-font-size-h5: 16px;
+  --kk-line-height: 1.5714285714285714;
+  --kk-line-height-sm: 1.6666666666666667;
+  --kk-line-height-lg: 1.5;
+
+  /* motion */
+  /* Spring easings sampled from a real spring (mass 1) and written as linear(),
+     so the motion feels like framer-motion without shipping a JS animation loop.
+     spring: k300 d25 · soft: k220 d26 · snap: k420 d28 */
+  --kk-ease-spring: linear(0.0, 0.0387, 0.1331, 0.2569, 0.391, 0.5219, 0.6414, 0.7449, 0.8305, 0.8983, 0.9497, 0.9867, 1.0116, 1.027, 1.0351, 1.0378, 1.0368, 1.0335, 1.0289, 1.0239, 1.0189, 1.0143, 1.0103, 1.0069, 1.0042, 1.0022, 1.0007, 0.9997, 0.9991, 0.9987, 0.9986, 0.9986, 0.9987);
+  --kk-ease-spring-soft: linear(0.0, 0.0263, 0.0911, 0.1777, 0.2742, 0.3725, 0.4671, 0.5546, 0.6333, 0.7024, 0.7618, 0.8121, 0.8539, 0.8883, 0.9161, 0.9382, 0.9556, 0.9691, 0.9794, 0.9871, 0.9927, 0.9967, 0.9995, 1.0013, 1.0024, 1.003, 1.0033, 1.0033, 1.0031, 1.0028, 1.0025, 1.0022, 1.0019);
+  --kk-ease-spring-snap: linear(0.0, 0.0431, 0.1481, 0.2847, 0.431, 0.5717, 0.6976, 0.8036, 0.8883, 0.9522, 0.9976, 1.0273, 1.0443, 1.0519, 1.0526, 1.0488, 1.0424, 1.0349, 1.0272, 1.02, 1.0137, 1.0085, 1.0045, 1.0015, 0.9994, 0.9981, 0.9974, 0.9972, 0.9973, 0.9975, 0.9979, 0.9983, 0.9987);
+  --kk-motion-spring: 0.42s;
+
+  --kk-motion-fast: 0.1s;
+  --kk-motion-mid: 0.2s;
+  --kk-motion-slow: 0.3s;
+  --kk-ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --kk-ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  --kk-ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --kk-ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --kk-ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  --kk-ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+  --kk-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --kk-ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+
+  /* shadow */
+  --kk-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --kk-shadow-secondary: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --kk-shadow-tertiary: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  --kk-shadow-card: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
+    0 5px 12px 4px rgba(0, 0, 0, 0.09);
+  --kk-shadow-drawer-right: -6px 0 16px 0 rgba(0, 0, 0, 0.08), -3px 0 6px -4px rgba(0, 0, 0, 0.12),
+    -9px 0 28px 8px rgba(0, 0, 0, 0.05);
+  --kk-shadow-popover-arrow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+
+  /* ---- short aliases ---- */
+  --background: var(--kk-bg-container);
+  --foreground: var(--kk-text);
+  --card: var(--kk-bg-container);
+  --card-foreground: var(--kk-text);
+  --popover: var(--kk-bg-elevated);
+  --popover-foreground: var(--kk-text);
+  --primary: var(--kk-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--kk-fill-tertiary);
+  --secondary-foreground: var(--kk-text);
+  --muted: var(--kk-bg-layout);
+  --muted-foreground: var(--kk-text-tertiary);
+  --accent: var(--kk-fill-tertiary);
+  --accent-foreground: var(--kk-text);
+  --destructive: var(--kk-error);
+  --destructive-foreground: #ffffff;
+  --border: var(--kk-border);
+  --input: var(--kk-border);
+  --ring: var(--kk-primary);
+  --radius: var(--kk-radius);
+}
+
+.dark {
+  --kk-chart-1: #3e89ff;
+  --kk-chart-2: #73d13d;
+  --kk-chart-3: #ffc53d;
+  --kk-chart-4: #9254de;
+  --kk-chart-5: #f759ab;
+
+  --kk-sidebar-bg: #141414;
+  --kk-sidebar-text: rgba(255, 255, 255, 0.85);
+  --kk-sidebar-border: #1f1f1f;
+  --kk-sidebar-item-hover: rgba(255, 255, 255, 0.08);
+  --kk-sidebar-item-active-bg: #111a2c;
+  --kk-sidebar-item-active-text: #3e89ff;
+  --kk-primary: #1668dc;
+  --kk-primary-hover: #3c89e8;
+  --kk-primary-active: #1554ad;
+  --kk-primary-bg: #111a2c;
+  --kk-primary-bg-hover: #112545;
+  --kk-primary-border: #15325b;
+  --kk-primary-border-hover: #15417e;
+  --kk-primary-text: #1668dc;
+  --kk-primary-text-hover: #3c89e8;
+  --kk-primary-text-active: #1554ad;
+
+  --kk-success: #49aa19;
+  --kk-success-hover: #6abe39;
+  --kk-success-active: #3c8618;
+  --kk-success-bg: #162312;
+  --kk-success-bg-hover: #1d3712;
+  --kk-success-border: #274916;
+  --kk-success-border-hover: #306317;
+  --kk-warning: #d89614;
+  --kk-warning-hover: #e8b339;
+  --kk-warning-active: #aa7714;
+  --kk-warning-bg: #2b2111;
+  --kk-warning-bg-hover: #443111;
+  --kk-warning-border: #594214;
+  --kk-warning-border-hover: #7c5914;
+  --kk-error: #dc4446;
+  --kk-error-hover: #e86e6b;
+  --kk-error-active: #ad393a;
+  --kk-error-bg: #2c1618;
+  --kk-error-bg-hover: #451d1f;
+  --kk-error-border: #5b2526;
+  --kk-error-border-hover: #7e2e2f;
+  --kk-info: #1668dc;
+  --kk-info-hover: #3c89e8;
+  --kk-info-active: #1554ad;
+  --kk-info-bg: #111a2c;
+  --kk-info-bg-hover: #112545;
+  --kk-info-border: #15325b;
+  --kk-info-border-hover: #15417e;
+  --kk-link: #1668dc;
+  --kk-link-hover: #15417e;
+  --kk-link-active: #1554ad;
+
+  --kk-text: rgba(255, 255, 255, 0.85);
+  --kk-text-secondary: rgba(255, 255, 255, 0.65);
+  --kk-text-tertiary: rgba(255, 255, 255, 0.45);
+  --kk-text-quaternary: rgba(255, 255, 255, 0.25);
+  --kk-text-heading: rgba(255, 255, 255, 0.85);
+  --kk-text-description: rgba(255, 255, 255, 0.45);
+  --kk-text-disabled: rgba(255, 255, 255, 0.25);
+  --kk-text-placeholder: rgba(255, 255, 255, 0.25);
+
+  --kk-fill: rgba(255, 255, 255, 0.18);
+  --kk-fill-secondary: rgba(255, 255, 255, 0.12);
+  --kk-fill-tertiary: rgba(255, 255, 255, 0.08);
+  --kk-fill-quaternary: rgba(255, 255, 255, 0.04);
+  --kk-fill-content: rgba(255, 255, 255, 0.12);
+  --kk-fill-alter: rgba(255, 255, 255, 0.04);
+
+  --kk-bg-container: #141414;
+  --kk-bg-container-disabled: rgba(255, 255, 255, 0.08);
+  --kk-bg-elevated: #1f1f1f;
+  --kk-bg-layout: #000000;
+  --kk-bg-spotlight: #424242;
+  --kk-bg-mask: rgba(0, 0, 0, 0.45);
+  --kk-bg-text-hover: rgba(255, 255, 255, 0.12);
+  --kk-bg-text-active: rgba(255, 255, 255, 0.18);
+  --kk-bg-solid: #fff;
+  --kk-bg-solid-hover: rgba(255, 255, 255, 0.75);
+  --kk-bg-solid-active: rgba(255, 255, 255, 0.95);
+
+  --kk-border: #424242;
+  --kk-border-secondary: #303030;
+  --kk-split: rgba(253, 253, 253, 0.12);
+
+  --kk-control-outline: rgba(0, 60, 180, 0.15);
+  --kk-control-item-bg-hover: rgba(255, 255, 255, 0.08);
+  --kk-control-item-bg-active: #111a2c;
+  --kk-control-item-bg-active-hover: #112545;
+
+  --kk-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32), 0 3px 6px -4px rgba(0, 0, 0, 0.48),
+    0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  --kk-shadow-secondary: var(--kk-shadow);
+  --kk-shadow-tertiary: 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --kk-shadow-card: 0 1px 2px -2px rgba(0, 0, 0, 0.64), 0 3px 6px 0 rgba(0, 0, 0, 0.48),
+    0 5px 12px 4px rgba(0, 0, 0, 0.36);
+
+  --primary-foreground: #ffffff;
+  --destructive-foreground: #ffffff;
+}
+
+/* ---- Tailwind v4 theme: turn tokens into utilities ---- */
+@theme inline {
+  /* every p-* / m-* / gap-* step scales from this, so the theme editor can
+     retune the density of the whole library from one number */
+  --spacing: var(--kk-spacing-unit, 0.25rem);
+  --font-sans: var(--kk-font-family);
+  --font-mono: var(--kk-font-family-code);
+
+  /* short aliases */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* palette utilities: bg-primary-hover, text-success, border-error-border ... */
+  --color-primary-hover: var(--kk-primary-hover);
+  --color-primary-active: var(--kk-primary-active);
+  --color-primary-bg: var(--kk-primary-bg);
+  --color-primary-bg-hover: var(--kk-primary-bg-hover);
+  --color-primary-border: var(--kk-primary-border);
+  --color-primary-border-hover: var(--kk-primary-border-hover);
+  --color-success: var(--kk-success);
+  --color-success-hover: var(--kk-success-hover);
+  --color-success-active: var(--kk-success-active);
+  --color-success-bg: var(--kk-success-bg);
+  --color-success-bg-hover: var(--kk-success-bg-hover);
+  --color-success-border: var(--kk-success-border);
+  --color-success-border-hover: var(--kk-success-border-hover);
+  --color-warning: var(--kk-warning);
+  --color-warning-hover: var(--kk-warning-hover);
+  --color-warning-active: var(--kk-warning-active);
+  --color-warning-bg: var(--kk-warning-bg);
+  --color-warning-bg-hover: var(--kk-warning-bg-hover);
+  --color-warning-border: var(--kk-warning-border);
+  --color-warning-border-hover: var(--kk-warning-border-hover);
+  --color-error: var(--kk-error);
+  --color-error-hover: var(--kk-error-hover);
+  --color-error-active: var(--kk-error-active);
+  --color-error-bg: var(--kk-error-bg);
+  --color-error-bg-hover: var(--kk-error-bg-hover);
+  --color-error-border: var(--kk-error-border);
+  --color-error-border-hover: var(--kk-error-border-hover);
+  --color-info: var(--kk-info);
+  --color-info-hover: var(--kk-info-hover);
+  --color-info-active: var(--kk-info-active);
+  --color-info-bg: var(--kk-info-bg);
+  --color-info-bg-hover: var(--kk-info-bg-hover);
+  --color-info-border: var(--kk-info-border);
+  --color-info-border-hover: var(--kk-info-border-hover);
+  --color-link: var(--kk-link);
+  --color-link-hover: var(--kk-link-hover);
+  --color-link-active: var(--kk-link-active);
+
+  --color-text: var(--kk-text);
+  --color-text-secondary: var(--kk-text-secondary);
+  --color-text-tertiary: var(--kk-text-tertiary);
+  --color-text-quaternary: var(--kk-text-quaternary);
+  --color-text-heading: var(--kk-text-heading);
+  --color-text-description: var(--kk-text-description);
+  --color-text-disabled: var(--kk-text-disabled);
+  --color-text-placeholder: var(--kk-text-placeholder);
+  --color-text-light-solid: var(--kk-text-light-solid);
+
+  --color-fill: var(--kk-fill);
+  --color-fill-secondary: var(--kk-fill-secondary);
+  --color-fill-tertiary: var(--kk-fill-tertiary);
+  --color-fill-quaternary: var(--kk-fill-quaternary);
+  --color-fill-content: var(--kk-fill-content);
+  --color-fill-alter: var(--kk-fill-alter);
+
+  --color-bg-container: var(--kk-bg-container);
+  --color-bg-container-disabled: var(--kk-bg-container-disabled);
+  --color-bg-elevated: var(--kk-bg-elevated);
+  --color-bg-layout: var(--kk-bg-layout);
+  --color-bg-spotlight: var(--kk-bg-spotlight);
+  --color-bg-mask: var(--kk-bg-mask);
+  --color-bg-text-hover: var(--kk-bg-text-hover);
+  --color-bg-text-active: var(--kk-bg-text-active);
+  --color-bg-solid: var(--kk-bg-solid);
+  --color-bg-solid-hover: var(--kk-bg-solid-hover);
+  --color-bg-solid-active: var(--kk-bg-solid-active);
+
+  --color-border-secondary: var(--kk-border-secondary);
+  --color-split: var(--kk-split);
+  --color-control-outline: var(--kk-control-outline);
+  --color-control-item-bg-hover: var(--kk-control-item-bg-hover);
+  --color-control-item-bg-active: var(--kk-control-item-bg-active);
+  --color-control-item-bg-active-hover: var(--kk-control-item-bg-active-hover);
+
+  /* extended preset palettes for Tag/Badge/Avatar */
+  --color-magenta: #eb2f96;
+  --color-magenta-bg: #fff0f6;
+  --color-magenta-border: #ffadd2;
+  --color-red: #f5222d;
+  --color-red-bg: #fff1f0;
+  --color-red-border: #ffa39e;
+  --color-volcano: #fa541c;
+  --color-volcano-bg: #fff2e8;
+  --color-volcano-border: #ffbb96;
+  --color-orange: #fa8c16;
+  --color-orange-bg: #fff7e6;
+  --color-orange-border: #ffd591;
+  --color-gold: #faad14;
+  --color-gold-bg: #fffbe6;
+  --color-gold-border: #ffe58f;
+  --color-lime: #a0d911;
+  --color-lime-bg: #fcffe6;
+  --color-lime-border: #eaff8f;
+  --color-green: #52c41a;
+  --color-green-bg: #f6ffed;
+  --color-green-border: #b7eb8f;
+  --color-cyan: #13c2c2;
+  --color-cyan-bg: #e6fffb;
+  --color-cyan-border: #87e8de;
+  --color-blue: #1677ff;
+  --color-blue-bg: #e6f4ff;
+  --color-blue-border: #91caff;
+  --color-geekblue: #2f54eb;
+  --color-geekblue-bg: #f0f5ff;
+  --color-geekblue-border: #adc6ff;
+  --color-purple: #722ed1;
+  --color-purple-bg: #f9f0ff;
+  --color-purple-border: #d3adf7;
+
+  /* radius (matches Tailwind defaults: sm 4 / md 6 / lg 8) */
+  --radius-xs: var(--kk-radius-xs);
+  --radius-sm: var(--kk-radius-sm);
+  --radius-md: var(--kk-radius);
+  --radius-lg: var(--kk-radius-lg);
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  /* control heights: h-control-sm / h-control / h-control-lg */
+  --spacing-control-xs: var(--kk-control-height-xs);
+  --spacing-control-sm: var(--kk-control-height-sm);
+  --spacing-control: var(--kk-control-height);
+  --spacing-control-lg: var(--kk-control-height-lg);
+
+  /* shadows: shadow-kk / shadow-kk-secondary / shadow-kk-card ... */
+  --shadow-kk: var(--kk-shadow);
+  --shadow-kk-secondary: var(--kk-shadow-secondary);
+  --shadow-kk-tertiary: var(--kk-shadow-tertiary);
+  --shadow-kk-card: var(--kk-shadow-card);
+  --shadow-kk-drawer: var(--kk-shadow-drawer-right);
+
+  /* motion: duration-fast/mid/slow + ease-kk-* */
+  --color-chart-1: var(--kk-chart-1);
+  --color-chart-2: var(--kk-chart-2);
+  --color-chart-3: var(--kk-chart-3);
+  --color-chart-4: var(--kk-chart-4);
+  --color-chart-5: var(--kk-chart-5);
+  --color-sidebar: var(--kk-sidebar-bg);
+  --color-sidebar-text: var(--kk-sidebar-text);
+  --color-sidebar-border: var(--kk-sidebar-border);
+  --color-sidebar-hover: var(--kk-sidebar-item-hover);
+  --color-sidebar-active: var(--kk-sidebar-item-active-bg);
+  --color-sidebar-active-text: var(--kk-sidebar-item-active-text);
+  --ease-kk-spring: var(--kk-ease-spring);
+  --ease-kk-spring-soft: var(--kk-ease-spring-soft);
+  --ease-kk-spring-snap: var(--kk-ease-spring-snap);
+  --ease-kk-in-out: var(--kk-ease-in-out);
+  --ease-kk-in-out-circ: var(--kk-ease-in-out-circ);
+  --ease-kk-out: var(--kk-ease-out);
+  --ease-kk-in: var(--kk-ease-in);
+  --ease-kk-out-back: var(--kk-ease-out-back);
+  --ease-kk-in-back: var(--kk-ease-in-back);
+  --ease-kk-out-quint: var(--kk-ease-out-quint);
+  --ease-kk-in-quint: var(--kk-ease-in-quint);
+
+  /* typography scale: text-h1..h5 */
+  --text-h1: var(--kk-font-size-h1);
+  --text-h1--line-height: 1.2105;
+  --text-h2: var(--kk-font-size-h2);
+  --text-h2--line-height: 1.2667;
+  --text-h3: var(--kk-font-size-h3);
+  --text-h3--line-height: 1.3333;
+  --text-h4: var(--kk-font-size-h4);
+  --text-h4--line-height: 1.4;
+  --text-h5: var(--kk-font-size-h5);
+  --text-h5--line-height: 1.5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: var(--kk-font-size);
+    line-height: var(--kk-line-height);
+  }
+  /* Thai needs a little more leading and no synthetic tightening */
+  html[lang="th"] body {
+    line-height: 1.7;
+    letter-spacing: 0;
+  }
+  html[lang="th"] h1,
+  html[lang="th"] h2,
+  html[lang="th"] h3 {
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--kk-primary-bg-hover);
+  }
+}
+
+/* wave click effect shared by Button / Switch / Radio / Checkbox */
+@keyframes kk-wave {
+  0% { box-shadow: 0 0 0 0 var(--kk-wave-color, var(--kk-primary)); opacity: 0.5; }
+  100% { box-shadow: 0 0 0 6px var(--kk-wave-color, var(--kk-primary)); opacity: 0; }
+}
+@utility kk-wave {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+  }
+  &[data-wave="on"]::after {
+    animation: kk-wave 0.45s var(--kk-ease-out-quint);
+  }
+}
+
+/* subtle scrollbar for docs / scroll areas */
+@utility kk-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--kk-fill) transparent;
+  &::-webkit-scrollbar { width: 6px; height: 6px; }
+  &::-webkit-scrollbar-thumb { background: var(--kk-fill); border-radius: 3px; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion — CSS only, so copied components stay dependency-free.        */
+/* Everything here honours prefers-reduced-motion.                      */
+/* ------------------------------------------------------------------ */
+@keyframes kk-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes kk-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kk-fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kk-zoom-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kk-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+@keyframes carousel-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes carousel-progress-vertical {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes kk-pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes kk-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes kk-progress-active {
+  0% { transform: translateX(-100%) scaleX(0.4); opacity: 0.35; }
+  100% { transform: translateX(100%) scaleX(1); opacity: 0; }
+}
+@keyframes kk-collapse-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--kk-collapse-height, auto); opacity: 1; }
+}
+
+/** Entrance helpers: `kk-in kk-in-up` (delay with `--kk-delay`). */
+@utility kk-in {
+  animation: kk-fade-in var(--kk-motion-slow) var(--kk-ease-out) both;
+  animation-delay: var(--kk-delay, 0ms);
+}
+@utility kk-in-up {
+  animation-name: kk-fade-up;
+}
+@utility kk-in-down {
+  animation-name: kk-fade-down;
+}
+@utility kk-in-zoom {
+  animation-name: kk-zoom-in;
+}
+
+/** Press feedback for clickable surfaces (buttons, menu items, cards).
+    The spring makes the release overshoot slightly, the way a physical key does. */
+@utility kk-press {
+  transition: transform var(--kk-motion-spring) var(--kk-ease-spring-snap);
+  &:active {
+    transform: scale(0.98);
+    transition-duration: var(--kk-motion-fast);
+    transition-timing-function: var(--kk-ease-out);
+  }
+}
+
+/** Hover nudge for interactive controls: a barely-there lift, sprung on release. */
+@utility kk-hover-pop {
+  /* one declaration so the spring keeps its own timing while colours ease
+     normally — a separate `transition-property` utility would overwrite it */
+  transition:
+    transform var(--kk-motion-spring) var(--kk-ease-spring-snap),
+    color var(--kk-motion-mid) var(--kk-ease-in-out),
+    background-color var(--kk-motion-mid) var(--kk-ease-in-out),
+    border-color var(--kk-motion-mid) var(--kk-ease-in-out),
+    box-shadow var(--kk-motion-mid) var(--kk-ease-in-out),
+    opacity var(--kk-motion-mid) var(--kk-ease-in-out);
+  &:hover {
+    transform: scale(1.01);
+  }
+  &:active {
+    transform: scale(0.98);
+    transition-duration: var(--kk-motion-fast);
+    transition-timing-function: var(--kk-ease-out);
+  }
+  &:disabled,
+  &[aria-disabled="true"] {
+    transform: none;
+  }
+}
+
+/** Panel entrance: the spring the overlays share. */
+@utility kk-spring-in {
+  animation: kk-spring-panel var(--kk-motion-spring) var(--kk-ease-spring) both;
+}
+
+@keyframes kk-spring-panel {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/** Hover lift used by cards / tiles. */
+@utility kk-lift {
+  transition:
+    transform var(--kk-motion-mid) var(--kk-ease-out),
+    box-shadow var(--kk-motion-mid) var(--kk-ease-out),
+    border-color var(--kk-motion-mid) var(--kk-ease-out);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--kk-shadow-card);
+  }
+}
+
+/** Loading shimmer (Skeleton). */
+/* Named motion durations — `duration-fast|mid|slow` used across the library.
+   Tailwind v4 has no --duration-* theme namespace, so they are declared as utilities.
+   Both custom properties are set so tw-animate-css (animate-in / animate-out) picks them up too. */
+@utility duration-fast {
+  --tw-duration: var(--kk-motion-fast);
+  --tw-animation-duration: var(--kk-motion-fast);
+  transition-duration: var(--kk-motion-fast);
+}
+@utility duration-mid {
+  --tw-duration: var(--kk-motion-mid);
+  --tw-animation-duration: var(--kk-motion-mid);
+  transition-duration: var(--kk-motion-mid);
+}
+@utility duration-slow {
+  --tw-duration: var(--kk-motion-slow);
+  --tw-animation-duration: var(--kk-motion-slow);
+  transition-duration: var(--kk-motion-slow);
+}
+
+@utility kk-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--kk-fill-secondary) 25%,
+    var(--kk-fill-quaternary) 37%,
+    var(--kk-fill-secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: kk-shimmer 1.4s ease infinite;
+}
+
+/** Status ring pulse (Badge processing, Tour spotlight). */
+@utility kk-pulse-ring {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid currentColor;
+    animation: kk-pulse-ring 1.2s var(--kk-ease-in-out) infinite;
+  }
+}
+
+/** Scroll reveal: set by the docs IntersectionObserver (data-reveal). */
+@utility kk-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.45s var(--kk-ease-out),
+    transform 0.45s var(--kk-ease-out);
+  transition-delay: var(--kk-delay, 0ms);
+  &[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .kk-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------------- Motion Primitives Keyframes ---------------- */
+@keyframes shiny {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
